@@ -97,6 +97,8 @@ func Run(c branchCommand, a subcommands.Application, args []string, env subcomma
 }
 
 func main() {
+	log.Print("ERROR: you're using the deprecated 'master' checkout of chromiumos/infra/go. You must use the 'main' branch instead.")
+	os.Exit(1)
 	opts := chromeinfra.DefaultAuthOptions()
 	opts.Scopes = []string{gerrit.OAuthScope, auth.OAuthScopeEmail}
 	s := &branchApplication{
