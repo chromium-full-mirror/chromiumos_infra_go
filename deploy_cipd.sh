@@ -4,6 +4,9 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+echo "Wrong branch! Check out main rather than master"
+exit 1
+
 cd "$(dirname "$0")"
 
 # Wrap all testplan commands as cipd package.
