@@ -1,6 +1,6 @@
 {
     "run_log_configuration": {
-        "destination_url": "gs://engeg-test-cycler-bucket/logs",
+        "destination_url": "gs://chromeos-throw-away-bucket/cycler-log",
         "chunk_size_bytes": 104857600,
         "channel_size": 10000,
         "persist_retries": 100,

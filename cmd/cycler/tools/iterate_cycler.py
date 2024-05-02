@@ -17,8 +17,13 @@ Pairs well with upload_cycler_results.py
 
 import subprocess
 
+# The bucket you are iterating.
 BUCKET = 'YOUR-BUCKET'
+# cycler rego policy.
 RUN_CONFIG_PATH = 'examples/YOUR-POLICY'
+# A new line separated file with the subdirs you want to iterate.
+# e.g. `gcloud storage ls gs://chromeos-image-archive > my_subdirs.txt`
+# You may also filter the results using `grep`.
 DIR_LISTING_PATH = 'YOUR-SUBDIRS'
 
 with open(DIR_LISTING_PATH, 'r', encoding='utf-8') as f:

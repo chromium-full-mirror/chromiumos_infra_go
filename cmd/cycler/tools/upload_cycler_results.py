@@ -19,10 +19,14 @@ import os
 import json
 import subprocess
 
-BQ_TABLE_ID = 'YOUR-BQ-TABLE'
+# Format of DATASET.TABLE
+BQ_TABLE_ID = 'YOUR-BQ-TABLE' # e.g. chromeos_bot_storage.storage
+# Dir containing results from iterate_cycler.py, e.g. cycler_results.
 RESULTS_DIR_PATH= 'YOUR-RESULTS-DIR'
+# Where to write out formatted results, e.g. formatted_cycler_results. Dir must exist.
 FORMATTED_RESULTS_DIR_PATH= 'YOUR-FORMATTED-RESULTS-DIR'
-GS_BUCKET= 'YOUR-GS-BUCKET'  # Used in table so we can aggregate across buckets.
+# Used in results uploaded to BQ so we can aggregate across buckets.
+GS_BUCKET= 'YOUR-GS-BUCKET'
 
 for filename in os.listdir(RESULTS_DIR_PATH):
     # Read and format results to be JSON KVs with newline delimiters per BQ.
@@ -52,7 +56,7 @@ for filename in os.listdir(RESULTS_DIR_PATH):
             f.write("\n".join(json.dumps(obj) for obj in formatted))
 
         # Upload row to BQ
-        cmd = [
+        cycler_cmd = [
             'bq',
             'load',
             '--autodetect',
@@ -62,5 +66,5 @@ for filename in os.listdir(RESULTS_DIR_PATH):
         ]
         cmd_str = ' '.join(cycler_cmd)
         print(f'Running {cmd_str}')
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        result = subprocess.run(cycler_cmd, check=True, capture_output=True, text=True)
         print(result.stdout)
